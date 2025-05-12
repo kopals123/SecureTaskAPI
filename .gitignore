@@ -2,4 +2,59 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
+## Ignore Visual Studio temporary files, build results, and user-specific files
+
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Build results
+bin/
+obj/
+out/
+[Bb]uild/
+[Ll]og/
+
+## ASP.NET Core related
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+secrets.json
+
+## Publish folders
+publish/
+wwwroot/dist/
+wwwroot/node_modules/
+
+## Rider / JetBrains
+.idea/
+*.sln.iml
+
+## Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+## NPM / Node (if using frontend or Swagger UI customization)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+## Logs
+*.log
+logs/
+
+## Database files
+*.mdf
+*.ldf
+
+## DotCover
+*.dotCover
+
+## Docker
+docker-compose.override.yml
+.env
+
+## Git
+*.orig
