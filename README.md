@@ -1,6 +1,5 @@
 # SecureTaskAPI
 Building a Task Management API, but you're focusing on building it "from the ground up" with all the best practices.
-Absolutely! Below is the full list of tasks formatted in **Markdown** for your `README.md`. This list follows a real-world learning and implementation roadmap for building your `SecureTask.API` project from scratch, including best practices, security, and testing via Postman.
 
 ---
 | Layer            | Technology                        |
@@ -11,7 +10,7 @@ Absolutely! Below is the full list of tasks formatted in **Markdown** for your `
 | Auth             | JWT Bearer Tokens                 |
 | DB               | SQL Server / SQLite (for testing) |
 | Testing          | Postman                           |
-| Docs             | Swagger / Swashbuckle             |
+| Docs             | Swagger                           |
 | Security         | HTTPS, CORS, Rate Limiting        |
 | Versioning       | Custom Headers / API Versioning   |
 | Containerization | Docker (optional)                 |
@@ -42,11 +41,6 @@ This project is a complete learning journey to build a secure, versioned, and pr
 ---
 
 ### 📁 Project Sections & Task Tracker
-
-> **Legend:**
-> `🟩` = Done, `⬜` = To Do, `🔄` = In Progress
-
----
 
 ### 📌 Phase 1: Project Setup
 
