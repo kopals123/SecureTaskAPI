@@ -1,0 +1,22 @@
+﻿using AutoMapper;
+using SecureTaskAPI.DTOs;
+using SecureTaskAPI.Models;
+
+namespace SecureTaskAPI.Mappings
+{
+    public class DTOModelMapper : Profile
+    {
+        public DTOModelMapper() 
+        {
+            CreateMap<POSTDto ,ApiModel>().ForMember(dest => dest.CreatedAt , opt => opt.MapFrom(src => DateTime.Now));
+
+            CreateMap<UpdateDTO, ApiModel>();
+
+            CreateMap<GetDTO, ApiModel>();
+
+            CreateMap<GetDTOList, ApiModel>();
+
+            CreateMap<DeleteDTO, ApiModel>();
+        }
+    }
+}
