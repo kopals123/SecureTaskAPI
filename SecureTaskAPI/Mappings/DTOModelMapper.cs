@@ -14,7 +14,13 @@ namespace SecureTaskAPI.Mappings
 
             CreateMap<GetDTO, ApiModel>();
 
+            CreateMap<ApiModel , POSTDto>();
+
+            CreateMap<ApiModel, GetDTO>();
+
             CreateMap<GetDTOList, ApiModel>();
+
+            CreateMap<ApiModel, GetDTOList>();
 
             CreateMap<DeleteDTO, ApiModel>();
         }

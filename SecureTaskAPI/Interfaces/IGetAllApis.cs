@@ -3,8 +3,8 @@ using SecureTaskAPI.Models;
 
 namespace SecureTaskAPI.Interfaces
 {
-    public interface IGetAPI
+    public interface IGetAllApis
     {
-        Task<GetDTO?> GetAPI(string apiName);
+        Task<List<GetDTOList>> getAllApis();
     }
 }
