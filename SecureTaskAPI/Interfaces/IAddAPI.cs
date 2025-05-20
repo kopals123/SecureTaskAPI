@@ -3,8 +3,9 @@ using SecureTaskAPI.Models;
 
 namespace SecureTaskAPI.Interfaces
 {
-    public interface IGetAPI
+
+    public interface IAddAPI
     {
-        Task<GetDTO?> GetAPI(string apiName);
+        Task<string> AddAPI(POSTDto dto);
     }
 }

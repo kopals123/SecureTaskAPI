@@ -18,16 +18,18 @@ namespace SecureTaskAPI.Service
             _mapper = mapper;
         }
 
-        public async Task<ApiModel?> GetAPI(string apiName)
+        public async Task<GetDTO?> GetAPI(string apiName)
         {
 
             try
             {
-                return await _dbContext?.ApiModel.FirstOrDefaultAsync(x => x.ApiName == apiName);
+                var result =  await _dbContext?.ApiModel.FirstOrDefaultAsync(x => x.ApiName == apiName);
+
+                return result == null ? null : _mapper.Map<GetDTO>(result);
             }
             catch (Exception ex)
             {
-                return null;
+                throw;
             }
         }
     }
