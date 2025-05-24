@@ -12,6 +12,8 @@ namespace SecureTaskAPI.Mappings
 
             CreateMap<UpdateDTO, ApiModel>();
 
+            CreateMap<ApiModel, UpdateDTO>();
+
             CreateMap<GetDTO, ApiModel>();
 
             CreateMap<ApiModel , POSTDto>();
@@ -22,7 +24,6 @@ namespace SecureTaskAPI.Mappings
 
             CreateMap<ApiModel, GetDTOList>();
 
-            CreateMap<DeleteDTO, ApiModel>();
         }
     }
 }

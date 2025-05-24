@@ -15,6 +15,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IGetAPI , GetApi>();
 builder.Services.AddScoped<IAddAPI , AddApi>();
 builder.Services.AddScoped<IGetAllApis , GetAllApis>();
+builder.Services.AddScoped<IDeleteApi, DeleteApi>();
+builder.Services.AddScoped<IUpdateApi , UpdateApi>();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
