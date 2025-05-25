@@ -29,6 +29,9 @@ namespace SecureTaskAPI.Controllers
         [HttpGet("GetApi")]
         public async Task<ActionResult<GetDTO?>> GetApi(string name)
         {
+            var stopwatch = new System.Diagnostics.Stopwatch();
+            stopwatch.Start();
+
             try
             {
                 var modelData = await _getAPI.GetAPI(name.ToLower());
@@ -37,6 +40,10 @@ namespace SecureTaskAPI.Controllers
                 {
                     return NotFound("Data Doesn't Exist");
                 }
+
+                stopwatch.Stop();
+                HttpContext.Response.Headers.Append("X-Response-Time", $"{stopwatch.ElapsedMilliseconds}ms");
+                
                 return Ok(modelData);
             }
             catch (Exception ex) {

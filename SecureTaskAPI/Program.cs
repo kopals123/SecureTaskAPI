@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SecureTaskAPI.Data;
 using SecureTaskAPI.Interfaces;
+using SecureTaskAPI.Middleware;
 using SecureTaskAPI.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<CustomHeaderMiddleWare>();
 
 app.UseHttpsRedirection();
 
