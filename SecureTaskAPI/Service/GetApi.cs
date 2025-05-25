@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using SecureTaskAPI.Data;
 using SecureTaskAPI.DTOs;
 using SecureTaskAPI.Interfaces;
-using SecureTaskAPI.Models;
 
 namespace SecureTaskAPI.Service
 {
@@ -11,11 +10,13 @@ namespace SecureTaskAPI.Service
     {
         private readonly IMapper _mapper;
         private readonly AppDbContext _dbContext;
+        private readonly ILogger<GetApi> _logger;
 
-        public GetApi(AppDbContext dbContext , IMapper mapper)
+        public GetApi(AppDbContext dbContext , IMapper mapper, ILogger<GetApi> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<GetDTO?> GetAPI(string apiName)
@@ -25,10 +26,13 @@ namespace SecureTaskAPI.Service
             {
                 var result =  await _dbContext?.ApiModel.FirstOrDefaultAsync(x => x.ApiName == apiName);
 
+                _logger.LogInformation("GetApi Successfull" + DateTime.Now.ToString() + apiName);
+                
                 return result == null ? null : _mapper.Map<GetDTO>(result);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString(), "GetApi" + apiName);
                 throw;
             }
         }

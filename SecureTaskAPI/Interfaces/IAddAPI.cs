@@ -1,5 +1,4 @@
 ﻿using SecureTaskAPI.DTOs;
-using SecureTaskAPI.Models;
 
 namespace SecureTaskAPI.Interfaces
 {

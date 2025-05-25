@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using SecureTaskAPI.Data;
-using SecureTaskAPI.DTOs;
-using SecureTaskAPI.Interfaces;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using SecureTaskAPI.Data;
+using SecureTaskAPI.Interfaces;
 
 namespace SecureTaskAPI.Service
 {
@@ -11,26 +9,37 @@ namespace SecureTaskAPI.Service
     {
         private readonly AppDbContext _dbcontext;
         private readonly IMapper _mapper;
-
-        public DeleteApi(AppDbContext context, IMapper mapper)
+        private readonly ILogger<DeleteApi> _logger;
+        public DeleteApi(AppDbContext context, IMapper mapper, ILogger<DeleteApi> logger)
         {
             _dbcontext = context;
             _mapper = mapper;
+            _logger = logger;
         }
         public async Task<string> DeleteApiByName(string name)
         {
-            var result = await _dbcontext.ApiModel.FirstOrDefaultAsync(x => x.ApiName.ToLower() == name.ToLower());
-
-            if (result == null)
+            try
             {
-                return "Api Doesnt exists";
+                var result = await _dbcontext.ApiModel.FirstOrDefaultAsync(x => x.ApiName.ToLower() == name.ToLower());
+
+                if (result == null)
+                {
+                    return "Api Doesnt exists";
+                }
+
+                _dbcontext.ApiModel.Remove(result);
+
+                await _dbcontext.SaveChangesAsync();
+
+                _logger.LogInformation("API Deleted Succesfully at " + DateTime.Now.ToString() + name);
+
+                return "Succesfully Delete Api";
             }
-
-            _dbcontext.ApiModel.Remove(result);
-
-            await _dbcontext.SaveChangesAsync();
-
-            return "Succesfully Delete Api";
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.ToString(), "DeleteAPI" + name);
+                throw;
+            }
         }
 
     }
