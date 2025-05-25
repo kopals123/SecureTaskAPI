@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SecureTaskAPI.DTOs;
 using SecureTaskAPI.Interfaces;
-using SecureTaskAPI.Models;
-using SecureTaskAPI.Service;
 
 namespace SecureTaskAPI.Controllers
 {

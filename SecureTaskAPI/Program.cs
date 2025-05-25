@@ -3,13 +3,20 @@ using SecureTaskAPI.Data;
 using SecureTaskAPI.Interfaces;
 using SecureTaskAPI.Middleware;
 using SecureTaskAPI.Service;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Logger Configuration
+
+Log.Logger = new LoggerConfiguration().WriteTo.File("Logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+builder.Host.UseSerilog();
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -32,6 +39,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<CustomHeaderMiddleWare>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 

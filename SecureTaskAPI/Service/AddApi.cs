@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using SecureTaskAPI.Data;
 using SecureTaskAPI.DTOs;
@@ -13,11 +11,13 @@ namespace SecureTaskAPI.Service
     {
         private readonly IMapper _mapper;
         private readonly AppDbContext _dbcontext;
+        private readonly ILogger<AddApi> _logger;
 
-        public AddApi(IMapper mapper , AppDbContext dbContext)
+        public AddApi(IMapper mapper , AppDbContext dbContext, ILogger<AddApi> logger)
         {
             _mapper = mapper;
             _dbcontext = dbContext;
+            _logger = logger;
         }
 
         public async Task<string> AddAPI(POSTDto dto)
@@ -32,17 +32,17 @@ namespace SecureTaskAPI.Service
                 }
 
                 var result = _mapper.Map<ApiModel>(dto);
-
                 result.CreatedAt = DateTime.Now;
 
                 await _dbcontext.ApiModel.AddAsync(result);
-
                 await _dbcontext.SaveChangesAsync();
+                _logger.LogInformation("API Added Succesfully at " + DateTime.Now.ToString() + dto.ApiName);
 
                 return "Successfully Added to DB";
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex.ToString(), "AddAPI" + dto);
                 throw;
             }
 
